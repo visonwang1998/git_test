@@ -39,12 +39,11 @@ arrayBDF_0 = [None]*4
 index_BDF = 0x40
 
 list_MSR0 = 2*[None]
-MSR_all = 2*[{}]
 
 # define PCI Address Bytes
 byte5 = byte6 = byte7 = byte8 = 0
 
-CPU_innerlist = 2*[{}]
+CPU_innerlist = 2*[None]
 total_array = {}       
 
 test0 = subprocess.run([file_path, "-H", ip, "-U", user, "-P", password, "-I", "lanplus", "raw", "6", "1"], stdout=subprocess.PIPE,stderr=subprocess.PIPE, text = True)
@@ -56,6 +55,7 @@ if test0.returncode == 0 and test1.returncode == 0:
         print("getting CPU_" + str(i) + " value...")
         
         list_MSR0[i] = {}
+        CPU_innerlist[i] = {}
         # cal MSR
         for j in range(MSR_index.shape[0]):
         # for j in range(1):
@@ -67,7 +67,7 @@ if test0.returncode == 0 and test1.returncode == 0:
                 if (MSR0_data.returncode == 0):
                     break
                 else:
-                    time.sleep(0.01)
+                    time.sleep(1)
             # get 8 bytes
             for k in range(8):
                 front = 3*(k+3)
@@ -91,7 +91,7 @@ if test0.returncode == 0 and test1.returncode == 0:
                 if (BDF_data_0.returncode == 0):
                     break
                 else:
-                    time.sleep(0)
+                    time.sleep(1)
             # get 4 bytes
             for k in range(4):
                 front = 3*(k+3)
