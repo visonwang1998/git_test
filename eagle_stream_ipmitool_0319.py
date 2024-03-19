@@ -78,9 +78,7 @@ if test0.returncode == 0 and test1.returncode == 0:
                 list_MSR0[i]["MSR_0x" + f"{MSR_index[j]:04X}"] = arrayMSR0_final
             else:
                 list_MSR0[i]["MSR_0x" + f"{MSR_index[j]:04X}"] = "N/A"
-        
-        # MSR_all[i] = {"MSR": list_MSR0[i]}
-        
+                
         # cal PCI
         for j in range(BDF[i].shape[0]):
             # calculate byte5-byte8
@@ -104,8 +102,6 @@ if test0.returncode == 0 and test1.returncode == 0:
                 list_BDF[i]["Bus0x" + f"{BDF[i][j, 0]:02X}" + "_Dev0x" + f"{BDF[i][j, 1]:02X}" + "_Fun0x" + f"{BDF[i][j, 2]:02X}" + "_Reg0x" + f"{BDF[i][j, 3]:03X}"] = arrayBDF_0_final 
             else:
                 list_BDF[i]["Bus0x" + f"{BDF[i][j, 0]:02X}" + "_Dev0x" + f"{BDF[i][j, 1]:02X}" + "_Fun0x" + f"{BDF[i][j, 2]:02X}" + "_Reg0x" + f"{BDF[i][j, 3]:03X}"] = "NA"
-
-        # PCI_all = {"PCI": list_BDF[i]}     
         
         CPU_innerlist[i]["MSR"] = list_MSR0[i]
         CPU_innerlist[i]["PCI"] = list_BDF[i]
