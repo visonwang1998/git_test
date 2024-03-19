@@ -26,7 +26,6 @@ BDF = CPU_num * [None]
 BDF[0] = np.array([[0x00, 0x00, 0x00, 0xE0], [0x1E, 0x00, 0x00, 0xA4], [0x1E, 0x00, 0x00, 0xA8], [0x1F, 0x1E, 0x01, 0x80], [0x1F, 0x1E, 0x01, 0x84]]) 
 BDF[1] = np.array([[0x00, 0x00, 0x00, 0xE0], [0x1E, 0x00, 0x00, 0xA4], [0x1E, 0x00, 0x00, 0xA8], [0x1F, 0x1E, 0x01, 0x80], [0x1F, 0x1E, 0x01, 0x84]]) 
 
-list_BDF = CPU_num * [{}]
 ####################################   Read Me!!   ################################################     
 # user & password
 user = "admin"
@@ -38,7 +37,8 @@ arrayMSR0_final = [None]
 arrayBDF_0 = [None]*4
 index_BDF = 0x40
 
-list_MSR0 = 2*[None]
+list_MSR0 = CPU_num * [None]
+list_BDF = CPU_num * [None]
 
 # define PCI Address Bytes
 byte5 = byte6 = byte7 = byte8 = 0
@@ -55,6 +55,7 @@ if test0.returncode == 0 and test1.returncode == 0:
         print("getting CPU_" + str(i) + " value...")
         
         list_MSR0[i] = {}
+        list_BDF[i] = {}
         CPU_innerlist[i] = {}
         # cal MSR
         for j in range(MSR_index.shape[0]):
@@ -75,7 +76,7 @@ if test0.returncode == 0 and test1.returncode == 0:
                 arrayMSR0[i][7-k] = (MSR0_data.stdout)[front+1:end] 
             arrayMSR0_final = ''.join(arrayMSR0[i])
             if MSR0_data.returncode == 0:    
-                list_MSR0[i]["MSR_0x" + f"{MSR_index[j]:04X}"] = arrayMSR0_final
+                list_MSR0[i]["MSR_0x" + f"{MSR_index[j]:04X}"] = "0x" + arrayMSR0_final
             else:
                 list_MSR0[i]["MSR_0x" + f"{MSR_index[j]:04X}"] = "N/A"
                 
@@ -99,7 +100,7 @@ if test0.returncode == 0 and test1.returncode == 0:
                 arrayBDF_0[3-k] = (BDF_data_0.stdout)[front+1:end] 
             arrayBDF_0_final = ''.join(arrayBDF_0)
             if BDF_data_0.returncode == 0:    
-                list_BDF[i]["Bus0x" + f"{BDF[i][j, 0]:02X}" + "_Dev0x" + f"{BDF[i][j, 1]:02X}" + "_Fun0x" + f"{BDF[i][j, 2]:02X}" + "_Reg0x" + f"{BDF[i][j, 3]:03X}"] = arrayBDF_0_final 
+                list_BDF[i]["Bus0x" + f"{BDF[i][j, 0]:02X}" + "_Dev0x" + f"{BDF[i][j, 1]:02X}" + "_Fun0x" + f"{BDF[i][j, 2]:02X}" + "_Reg0x" + f"{BDF[i][j, 3]:03X}"] = "0x" + arrayBDF_0_final 
             else:
                 list_BDF[i]["Bus0x" + f"{BDF[i][j, 0]:02X}" + "_Dev0x" + f"{BDF[i][j, 1]:02X}" + "_Fun0x" + f"{BDF[i][j, 2]:02X}" + "_Reg0x" + f"{BDF[i][j, 3]:03X}"] = "NA"
         
