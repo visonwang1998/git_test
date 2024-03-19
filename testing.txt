@@ -1,0 +1,2 @@
+ipmitool -H 192.9.85.29 -U admin -P password -I lanplus -b 6 -t 0x2c raw 6 1
+ipmitool -H 192.9.85.29 -U admin -P password -I lanplus raw 6 1

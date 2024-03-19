@@ -44,7 +44,7 @@ MSR_all = 2*[{}]
 # define PCI Address Bytes
 byte5 = byte6 = byte7 = byte8 = 0
 
-CPU_innerlist = 2*[None]
+CPU_innerlist = 2*[{}]
 total_array = {}       
 
 test0 = subprocess.run([file_path, "-H", ip, "-U", user, "-P", password, "-I", "lanplus", "raw", "6", "1"], stdout=subprocess.PIPE,stderr=subprocess.PIPE, text = True)
@@ -79,7 +79,7 @@ if test0.returncode == 0 and test1.returncode == 0:
             else:
                 list_MSR0[i]["MSR_0x" + f"{MSR_index[j]:04X}"] = "N/A"
         
-        MSR_all[i] = {"MSR": list_MSR0[i]}
+        # MSR_all[i] = {"MSR": list_MSR0[i]}
         
         # cal PCI
         for j in range(BDF[i].shape[0]):
@@ -105,8 +105,10 @@ if test0.returncode == 0 and test1.returncode == 0:
             else:
                 list_BDF[i]["Bus0x" + f"{BDF[i][j, 0]:02X}" + "_Dev0x" + f"{BDF[i][j, 1]:02X}" + "_Fun0x" + f"{BDF[i][j, 2]:02X}" + "_Reg0x" + f"{BDF[i][j, 3]:03X}"] = "NA"
 
-        PCI_all = {"PCI": list_BDF[i]}        
-        CPU_innerlist[i] = [MSR_all[i], PCI_all]
+        # PCI_all = {"PCI": list_BDF[i]}     
+        
+        CPU_innerlist[i]["MSR"] = list_MSR0[i]
+        CPU_innerlist[i]["PCI"] = list_BDF[i]
         
         if i == 0:
             total_array["CPU0"] = CPU_innerlist[i]
