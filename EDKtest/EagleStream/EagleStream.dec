@@ -1,0 +1,39 @@
+#**********************************************************************
+#**********************************************************************
+#**                                                                  **
+#**        (C)Copyright 1985-2011, American Megatrends, Inc.         **
+#**                                                                  **
+#**                       All Rights Reserved.                       **
+#**                                                                  **
+#**      5555 Oakbrook Parkway, Suite 200, Norcross, GA 30093        **
+#**                                                                  **
+#**                       Phone: (770)-246-8600                      **
+#**                                                                  **
+#**********************************************************************
+#**********************************************************************
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = EagleStreamPkg
+  PACKAGE_GUID                   = A6FF1477-7C48-44BC-9715-9453F0ED9D56
+  PACKAGE_VERSION                = 0.1
+
+[Includes]
+  ../
+  EagleStreamPch/SouthClusterLbg/Include
+  EagleStreamPch/SouthClusterLbg/IncludePrivate
+  ../../Common/Kcs #[Gbt_Lulu_C005]
+  EagleStreamPch/SouthClusterLbg/Library/PciSegmentLib  # [Gbt_Jim_Y0008]
+
+
+[LibraryClasses]
+  EmulatorPkg/Library/SmbiosLib
+  EmulatorPkg/Include/Library 
+
+[Guids]
+
+
+[Protocols]
+
+
+[Ppis]
